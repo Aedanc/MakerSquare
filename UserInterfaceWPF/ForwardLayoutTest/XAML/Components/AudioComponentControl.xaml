@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ForwardLayoutTest.XAML.Components.AudioComponentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ForwardLayoutTest.XAML.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Name="panel">
+            <TextBlock FontWeight="Bold" FontSize="18" HorizontalAlignment="Center">=== Composant Audio ===</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <Button Click="SearchAudioFileClick">Sélectionner un fichier</Button>
+                <TextBlock Name="TextFileName" Visibility="Hidden"></TextBlock>
+            </StackPanel>   
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="75">Jouer au lancement: </TextBlock>
+                <CheckBox Name="PlayCheckBox"></CheckBox>
+            </StackPanel>
+            <Button Click="deleteComponent">Supprimer</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

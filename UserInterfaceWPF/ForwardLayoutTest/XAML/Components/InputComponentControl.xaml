@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="ForwardLayoutTest.XAML.Components.InputComponentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ForwardLayoutTest.XAML.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Name="panel">
+            <TextBlock FontWeight="Bold" FontSize="18" HorizontalAlignment="Center">=== Composant d'Actions ===</TextBlock>
+            <StackPanel Name="KeyActionsPanel">
+                <StackPanel Name="ActionPanel">
+                    <TextBlock HorizontalAlignment="Stretch" Width="auto">Action:</TextBlock>
+                    <ComboBox HorizontalAlignment="Stretch" Width="auto">
+                        <ComboBoxItem IsSelected="True" Name="Up">Haut</ComboBoxItem>
+                        <ComboBoxItem Name="Down">Bas</ComboBoxItem>
+                        <ComboBoxItem Name="Left">Gauche</ComboBoxItem>
+                        <ComboBoxItem Name="Right">Droite</ComboBoxItem>
+                        <ComboBoxItem Name="Z">Z</ComboBoxItem>
+                        <ComboBoxItem Name="Q">Q</ComboBoxItem>
+                        <ComboBoxItem Name="S">S</ComboBoxItem>
+                        <ComboBoxItem Name="D">D</ComboBoxItem>
+                        <ComboBoxItem Name="Escape">Échap</ComboBoxItem>
+                        <ComboBoxItem Name="Enter">Entrée</ComboBoxItem>
+                        <ComboBoxItem Name="Space">Espace</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox HorizontalAlignment="Stretch" Width="auto">
+                        <ComboBoxItem IsSelected="True" Name="PRESSED">Pression</ComboBoxItem>
+                        <ComboBoxItem Name="RELEASED">Relâchement</ComboBoxItem>
+                        <ComboBoxItem Name="DOWN">Maintenue</ComboBoxItem>
+                        <ComboBoxItem Name="UP">Non pressée</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox HorizontalAlignment="Stretch" Width="auto">
+                        <ComboBoxItem IsSelected="True" Name="move_up">Déplacement haut</ComboBoxItem>
+                        <ComboBoxItem Name="move_down">Déplacement bas</ComboBoxItem>
+                        <ComboBoxItem Name="move_left">Déplacement gauche</ComboBoxItem>
+                        <ComboBoxItem Name="move_right">Déplacement droite</ComboBoxItem>
+                        <ComboBoxItem Name="pause">Pause</ComboBoxItem>
+                        <ComboBoxItem Name="quit">Quitter</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <Button Click="AddActionButtonClick">Ajouter une Action</Button>
+            <Button Click="deleteComponent">Supprimer</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

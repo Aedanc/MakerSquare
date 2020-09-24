@@ -1,0 +1,72 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+using System.IO;
+using System.Collections.Generic;
+using Engine;
+using MakerSquare.SavingSystem;
+using Game.Prefabs;
+
+namespace Game.Prefabs
+{
+	public struct Dummy
+	{
+	};
+}
+
+namespace EngineLive
+{    
+	public class Embed
+	{
+		public static void LoadScene(string scene_name, Engine.Core.Game game, bool additively = false)
+		{
+			var save_manager = new SavedFilesManager(MakerSquare.FileSystem.Manager.Instance);
+            var scene = new SavedScene();
+            save_manager.LoadScene(out scene, scene_name);
+
+            if (!additively)
+                EntityManager.UnloadEntities();
+
+            EntityManager.AddListEntityInList(scene.entities);
+			if (game.IsActive)
+				EntityManager.PostContentLoad();
+        }
+    }
+
+    class Program
+    {
+
+        public static void CreateGameScene()
+        {
+            var save_manager = new SavedFilesManager(MakerSquare.FileSystem.Manager.Instance);
+			<# foreach (ReificationData reif in _reificationDataList) { #>
+				var <#= reif.varname #> = <#= reif.reif_str #>;
+			<# } #>
+            var PreSave = new List<Entity> { 
+			<# foreach (ReificationData reif in _reificationDataList) { #>
+				<#= reif.varname #>,
+			<# } #>
+			};
+            var scene = new SavedScene();
+            scene.entities = PreSave;
+            save_manager.SaveScene(scene, "game_scene");
+        }
+
+
+        static void Main(string[] args)
+        {
+            var dir = Path.Combine(Directory.GetCurrentDirectory(), "Content");
+            MakerSquare.FileSystem.Manager.Initialize(dir);
+            MakerSquare.FileSystem.Manager filesystem = MakerSquare.FileSystem.Manager.Instance;
+            using (var game = Engine.Core.Game.Instance)
+            {                
+                CreateGameScene();
+                Embed.LoadScene("game_scene", game);
+                game.Run();
+            }            
+        }
+    }
+}

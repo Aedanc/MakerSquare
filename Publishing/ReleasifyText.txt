@@ -1,0 +1,1 @@
+Squirrel --releasify .\MakerSquare.1.0.0.nupkg --setupIcon=mk2.ico --icon=mk2.ico --no-msi

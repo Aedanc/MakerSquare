@@ -1,0 +1,162 @@
+﻿<Window x:Class="ForwardLayoutTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ForwardLayoutTest.XAML"
+        mc:Ignorable="d"
+        Icon="pack://application:,,,/Resources/Icons/Mk2Simple.ico"
+        Title="MakerSquare" Height="1080" Width="1920." WindowState="Maximized"
+        PreviewMouseUp="WindowMouseUp">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="1300"/> 
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="700" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="Projet">
+                <MenuItem Header="Ouvrir" PreviewMouseLeftButtonDown="MenuItem_Ouvrir"/>
+                <MenuItem Header="Sauvegarder" PreviewMouseLeftButtonDown="MenuItem_Sauvegarder"/>
+                <MenuItem Header="Compiler" PreviewMouseLeftButtonDown="MenuItem_Compiler"/>
+                <Separator />
+                <MenuItem Header="Quitter" PreviewMouseLeftButtonDown="MenuItem_Quitter"/>
+            </MenuItem>
+           <MenuItem Header="Préfabriqués" Visibility="Hidden">
+                <MenuItem x:Name="BreakoutMenuEntry" IsCheckable="True" IsChecked="False" PreviewMouseLeftButtonDown="MenuItem_BreakoutPrefab" Header="Casse-Briques"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <!-- Tabs -->
+        <TabControl Grid.Row="1" Grid.RowSpan="3" Grid.Column="0">
+            <!-- users -->
+            <!--<TabItem  Name="MainWindowExpanderUsers" Header="Users">
+                <ListBox>
+                    <TextBlock Text="User 1" Foreground="Orange" FontSize="16"></TextBlock>
+                    <TextBlock Text="User 2" Foreground="Red" FontSize="16"></TextBlock>
+                    <TextBlock Text="User 3" Foreground="Blue" FontSize="16"></TextBlock>
+                    <TextBlock Text="User 4" Foreground="Green" FontSize="16"></TextBlock>
+                </ListBox>
+            </TabItem>-->
+
+            <!-- resources - Replaced by FileExplorer -->
+            <!--<TabItem Name="MainWindowExpanderEntities" Header="resources">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                    <StackPanel x:Name="MainWindowStackPanelEntities">
+                    </StackPanel>
+
+                </ScrollViewer>
+            </TabItem>-->
+
+            <!-- Entity -->
+            <TabItem Header="Entités">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!-- Search box -->
+                    <TextBox Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" FontSize="16"></TextBox>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+                        <ListBox Name="listEntities" SelectionChanged="ListEntities_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition SharedSizeGroup="Entity" Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Path=Name}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <!-- Canvas -->
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+
+
+            <Border Name="canvasGrid" Grid.Row="0" Grid.Column="0" BorderBrush="Aqua" BorderThickness="5">
+
+                <ScrollViewer HorizontalScrollBarVisibility="Visible"
+                              VerticalScrollBarVisibility="Visible"
+                              PreviewMouseDown="ScrollViewerMouseDown"
+                              PreviewMouseUp="ScrollViewerMouseUp"
+                              MouseMove="ScrollViewerMouseMove"
+                              Name="canvasScrollViewer">
+                    <Canvas Grid.Column="0" Grid.Row="0" Name="mainWindowCanvas" Width="Auto" Height="Auto"
+						ClipToBounds="True"
+                        AllowDrop="True"
+                        Drop="CanvasDrop">
+                        <Canvas.Background>
+                            <SolidColorBrush Color="LightGray" Opacity="100"/>
+                        </Canvas.Background>
+                        <Canvas.LayoutTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"></ScaleTransform>
+                        </Canvas.LayoutTransform>
+                        <Rectangle x:Name="SelectBox"
+                                   Stroke="DarkOrange"
+                                   Visibility="Collapsed"
+                                   Fill="#77FFFFFF"
+                                   Panel.ZIndex="1000">
+                        </Rectangle>
+                    </Canvas>
+                </ScrollViewer>
+            </Border>
+
+
+        </Grid>
+
+        <!-- File explorer -->
+        <local:FileExplorer Grid.Column="1" Grid.Row="4">
+        </local:FileExplorer>
+
+        <!-- Entity menu -->
+        <Grid Grid.RowSpan="3" Grid.Row="1" Grid.Column="3" Name="entityMenuGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition MaxHeight="30" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Name="contextMenuPanel">
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="18"
+                           TextDecorations="Underline">Composants</TextBlock>
+            </StackPanel>
+
+            <!--<Grid Grid.RowSpan="2" Grid.Column="2" Margin="5, 30" Name="entityMenuItem">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="18*" />
+                    <RowDefinition MaxHeight="10" Height="8*"/>
+                    <RowDefinition MinHeight="5" Height="963*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" FontSize="11" Margin="0,0,215,0">X :</TextBlock>
+                <TextBox Margin="25,0,0,0"/>
+        </Grid>-->
+
+            <Button Name="componentButton"
+                    Visibility="Hidden"
+                    Grid.Row="1">
+                Ajouter un Composant
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

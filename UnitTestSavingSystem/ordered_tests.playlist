@@ -1,0 +1,10 @@
+<Playlist Version="1.0">
+  <Add Test="UnitTestSavingSystem.UnitTest1.TestConfigSerializeDeserialize" />
+  <Add Test="UnitTestSavingSystem.UnitTest1.TestPrefabSerializeDeserialize" />
+  <Add Test="UnitTestSavingSystem.UnitTest1.TestSaveSysDirectoryExistsEmpty" />
+  <Add Test="UnitTestSavingSystem.UnitTest1.TestSaveSysDirectoryExistsFull" />
+  <Add Test="UnitTestSavingSystem.UnitTest1.TestSaveSysDirectoryFree" />
+  <Add Test="UnitTestSavingSystem.UnitTest1.TestSaveSysDirectoryIsFile" />
+  <Add Test="UnitTestSavingSystem.UnitTest1.TestSaveSysDirectoryNoRights" />
+  <Add Test="UnitTestSavingSystem.UnitTest1.TestSceneSerializeDeserialize" />
+</Playlist>

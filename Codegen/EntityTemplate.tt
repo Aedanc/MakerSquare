@@ -1,0 +1,25 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" linePragmas="false" #>
+using System;
+using Engine;
+
+namespace Game.Prefabs
+{
+	[Serializable]
+	class <#= _className #> : Entity
+	{		
+		public <#= _className #>(bool onLaunch) : base(onLaunch)
+		{					
+			this.Transform.x = <#= _x_pos #>;
+			this.Transform.y = <#= _y_pos #>;		
+			this.Transform.depth = <#= _depth #>;
+			InstantiateComponents(onLaunch);
+		}
+
+		private void InstantiateComponents(bool onLaunch)
+		{			
+			<# foreach (string component in _components) { #>
+			<#= component #>;
+			<# } #>
+		}
+	}
+}

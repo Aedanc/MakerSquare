@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="ForwardLayoutTest.XAML.ComponentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ForwardLayoutTest.XAML"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="330"
+             Background="White">
+    <Grid>
+        <Border BorderThickness="5" BorderBrush="DarkGray"></Border>
+        <StackPanel Margin="10">
+            <Button Click="ComponentButtonClick" Name="CollisionComponent">Composant de Collision</Button>
+            <Button Click="ComponentButtonClick" Name="SpriteComponent">Composant d'Image</Button>
+            <Button Click="ComponentButtonClick" Name="MovementComponent">Composant de Mouvement</Button>
+            <Button Click="ComponentButtonClick" Name="AudioComponent">Composant Audio</Button>
+            <!--<Button Click="ComponentButtonClick" Name="RuleComponent">Composant de Règle</Button>-->
+            <Button Click="ComponentButtonClick" Name="InputComponent">Composant d'Actions</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

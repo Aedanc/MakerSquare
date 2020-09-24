@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentManifest Name="Global">
+  <ContentGroup Name="Fonts" Directory="Fonts" Type="Ultraviolet.Graphics.Graphics2D.SpriteFont">
+  </ContentGroup>
+  <ContentGroup Name="Sprites" Directory="Sprites" Type="Ultraviolet.Graphics.Graphics2D.Sprite">
+  </ContentGroup>
+  <ContentGroup Name="Textures" Directory="Textures" Type="Ultraviolet.Graphics.Texture2D">
+  </ContentGroup>
+  <ContentGroup Name="Songs" Directory="Songs" Type="Ultraviolet.Audio.Song">
+  </ContentGroup>
+  <ContentGroup Name="SoundEffects" Directory="SoundEffects" Type="Ultraviolet.Audio.SoundEffect">
+  </ContentGroup>
+  <ContentGroup Name="Cursors" Directory="Cursors" Type="Ultraviolet.CursorCollection">
+  </ContentGroup>
+  <ContentGroup Name="Effects" Directory="Effects" Type="Ultraviolet.Graphics.Effect">
+  </ContentGroup>
+</ContentManifest>

@@ -1,0 +1,73 @@
+﻿<Window x:Class="ForwardLayoutTest.XAML.FileAddingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ForwardLayoutTest.XAML"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Ajout de ressource" MinHeight="160" MaxHeight="160" Width="800">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Self}}" Value="False">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <!--Ca marche paas-->
+                                <!--<ControlTemplate.Triggers>
+                                    <Trigger Property="IsReadOnly" Value="true">
+                                        <Setter Property="Background" Value="LightGray" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>-->
+                                <Border BorderThickness="1" CornerRadius="1">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFABADB3" Offset="0"/>
+                                            <GradientStop Color="#FFABADB3" Offset="0.044"/>
+                                            <GradientStop Color="#FFE2E3EA" Offset="0.060"/>
+                                            <GradientStop Color="#FFE3E9EF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <TextBlock Padding="4,2,0,0" Text="{TemplateBinding Text}" TextTrimming="CharacterEllipsis"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>        
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">Fichier à ajouter :</Label>
+        <TextBox x:Name="FileTextField" Grid.Row="0" Grid.Column="1"  Margin="10,10,0,0" Width="400" IsReadOnly="True" TextChanged="FileTextField_TextChanged">
+            Clique sur le bouton à droite pour choisir un fichier !
+        </TextBox>
+        <Button Grid.Row="0" Grid.Column="2" Width="25" Margin="10,10,0,0" Click="FileButton_Click">...</Button>
+
+        <Label x:Name="FileValidationField" Grid.Row="0" Grid.Column="3" Margin="10,10,0,0" Width="140"></Label>
+
+        <Label Grid.Row="1" Grid.Column="0" Margin="10,10,0,0" >Nom à donner à la ressource:</Label>
+        <TextBox x:Name="NameTextField" Grid.Row="1" Grid.Column="1" Width="400" Margin="10,10,0,0" TextChanged="NameTextField_TextChanged" MaxLength="35"/>
+        <Label x:Name="NameValidationField" Grid.Row="1" Grid.Column="3" Margin="10,10,0,0" Width="140"></Label>
+
+        <Button Margin="0,20,0,0" x:Name="AddResourceButton" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Width="150" IsEnabled="False" Click="AddButton_Click">
+            Créer une ressource
+        </Button>
+    </Grid>
+</Window>
